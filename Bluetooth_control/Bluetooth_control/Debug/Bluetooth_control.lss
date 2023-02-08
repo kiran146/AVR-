@@ -1,0 +1,430 @@
+
+Bluetooth_control.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000022c  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000013a  00800060  0000022c  000002a0  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  000003da  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 000000b8  00000000  00000000  0000040a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   0000111d  00000000  00000000  000004c2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 0000031c  00000000  00000000  000015df  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000003d5  00000000  00000000  000018fb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  000001ac  00000000  00000000  00001cd0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000401  00000000  00000000  00001e7c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    0000068d  00000000  00000000  0000227d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 000000a8  00000000  00000000  0000290a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	11 e0       	ldi	r17, 0x01	; 1
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ec e2       	ldi	r30, 0x2C	; 44
+  68:	f2 e0       	ldi	r31, 0x02	; 2
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	aa 39       	cpi	r26, 0x9A	; 154
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	21 e0       	ldi	r18, 0x01	; 1
+  78:	aa e9       	ldi	r26, 0x9A	; 154
+  7a:	b1 e0       	ldi	r27, 0x01	; 1
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	aa 39       	cpi	r26, 0x9A	; 154
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 af 00 	call	0x15e	; 0x15e <main>
+  8a:	0c 94 14 01 	jmp	0x228	; 0x228 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <lcd_data_write>:
+	{
+		usart_string_transmit("AT+UART=57600,0,0");
+	}
+	else if(baud_rate==115200)
+	{
+		usart_string_transmit("AT+UART=115200,0,0");
+  92:	95 e0       	ldi	r25, 0x05	; 5
+  94:	95 bb       	out	0x15, r25	; 21
+  96:	88 bb       	out	0x18, r24	; 24
+  98:	87 eb       	ldi	r24, 0xB7	; 183
+  9a:	9b e0       	ldi	r25, 0x0B	; 11
+	}
+	else if(baud_rate==230400)
+  9c:	01 97       	sbiw	r24, 0x01	; 1
+  9e:	f1 f7       	brne	.-4      	; 0x9c <lcd_data_write+0xa>
+  a0:	00 c0       	rjmp	.+0      	; 0xa2 <lcd_data_write+0x10>
+  a2:	00 00       	nop
+  a4:	81 e0       	ldi	r24, 0x01	; 1
+  a6:	85 bb       	out	0x15, r24	; 21
+  a8:	87 eb       	ldi	r24, 0xB7	; 183
+	{
+		usart_string_transmit("AT+UART=230400,0,0");
+  aa:	9b e0       	ldi	r25, 0x0B	; 11
+  ac:	01 97       	sbiw	r24, 0x01	; 1
+  ae:	f1 f7       	brne	.-4      	; 0xac <lcd_data_write+0x1a>
+  b0:	00 c0       	rjmp	.+0      	; 0xb2 <lcd_data_write+0x20>
+  b2:	00 00       	nop
+	}
+	else if(baud_rate==460800)
+  b4:	08 95       	ret
+
+000000b6 <lcd_command_write>:
+  b6:	94 e0       	ldi	r25, 0x04	; 4
+  b8:	95 bb       	out	0x15, r25	; 21
+  ba:	88 bb       	out	0x18, r24	; 24
+  bc:	87 eb       	ldi	r24, 0xB7	; 183
+  be:	9b e0       	ldi	r25, 0x0B	; 11
+  c0:	01 97       	sbiw	r24, 0x01	; 1
+	{
+		usart_string_transmit("AT+UART=460800,0,0");
+  c2:	f1 f7       	brne	.-4      	; 0xc0 <lcd_command_write+0xa>
+  c4:	00 c0       	rjmp	.+0      	; 0xc6 <lcd_command_write+0x10>
+  c6:	00 00       	nop
+  c8:	15 ba       	out	0x15, r1	; 21
+  ca:	87 eb       	ldi	r24, 0xB7	; 183
+	}
+	else if(baud_rate==921600)
+  cc:	9b e0       	ldi	r25, 0x0B	; 11
+  ce:	01 97       	sbiw	r24, 0x01	; 1
+  d0:	f1 f7       	brne	.-4      	; 0xce <lcd_command_write+0x18>
+  d2:	00 c0       	rjmp	.+0      	; 0xd4 <lcd_command_write+0x1e>
+  d4:	00 00       	nop
+  d6:	08 95       	ret
+
+000000d8 <lcd_init>:
+  d8:	88 e3       	ldi	r24, 0x38	; 56
+	{
+		usart_string_transmit("AT+UART=921600,0,0");
+  da:	0e 94 5b 00 	call	0xb6	; 0xb6 <lcd_command_write>
+  de:	81 e0       	ldi	r24, 0x01	; 1
+  e0:	0e 94 5b 00 	call	0xb6	; 0xb6 <lcd_command_write>
+	}
+	else if(baud_rate==1382400)
+  e4:	86 e0       	ldi	r24, 0x06	; 6
+  e6:	0e 94 5b 00 	call	0xb6	; 0xb6 <lcd_command_write>
+  ea:	8e e0       	ldi	r24, 0x0E	; 14
+  ec:	0e 94 5b 00 	call	0xb6	; 0xb6 <lcd_command_write>
+	{
+		usart_string_transmit("AT+UART=1382400,0,0");
+  f0:	08 95       	ret
+
+000000f2 <lcd_string_write>:
+  f2:	cf 93       	push	r28
+  f4:	df 93       	push	r29
+	}
+	else
+	{
+		;
+	}
+	usart_data_transmit(0x0d);
+  f6:	ec 01       	movw	r28, r24
+  f8:	88 81       	ld	r24, Y
+  fa:	88 23       	and	r24, r24
+	usart_data_transmit(0x0a);
+  fc:	31 f0       	breq	.+12     	; 0x10a <lcd_string_write+0x18>
+  fe:	21 96       	adiw	r28, 0x01	; 1
+ 100:	0e 94 49 00 	call	0x92	; 0x92 <lcd_data_write>
+	usart_string_receive(hc_05_buffer1,13);
+ 104:	89 91       	ld	r24, Y+
+ 106:	81 11       	cpse	r24, r1
+ 108:	fb cf       	rjmp	.-10     	; 0x100 <lcd_string_write+0xe>
+ 10a:	df 91       	pop	r29
+	temp=usart_data_receive();
+ 10c:	cf 91       	pop	r28
+ 10e:	08 95       	ret
+
+00000110 <usart_init>:
+ 110:	10 bc       	out	0x20, r1	; 32
+ 112:	83 e3       	ldi	r24, 0x33	; 51
+	
+	if(!(strcmp(hc_05_buffer1,"OK")))
+ 114:	89 b9       	out	0x09, r24	; 9
+ 116:	8a b1       	in	r24, 0x0a	; 10
+ 118:	88 61       	ori	r24, 0x18	; 24
+ 11a:	8a b9       	out	0x0a, r24	; 10
+ 11c:	80 b5       	in	r24, 0x20	; 32
+ 11e:	86 68       	ori	r24, 0x86	; 134
+ 120:	80 bd       	out	0x20, r24	; 32
+ 122:	08 95       	ret
+
+00000124 <usart_data_transmit>:
+ 124:	5d 9b       	sbis	0x0b, 5	; 11
+ 126:	fe cf       	rjmp	.-4      	; 0x124 <usart_data_transmit>
+	}
+	else
+	{
+		return 0;
+	}
+}
+ 128:	8c b9       	out	0x0c, r24	; 12
+ 12a:	87 eb       	ldi	r24, 0xB7	; 183
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 12c:	9b e0       	ldi	r25, 0x0B	; 11
+ 12e:	01 97       	sbiw	r24, 0x01	; 1
+ 130:	f1 f7       	brne	.-4      	; 0x12e <usart_data_transmit+0xa>
+ 132:	00 c0       	rjmp	.+0      	; 0x134 <usart_data_transmit+0x10>
+ 134:	00 00       	nop
+ 136:	08 95       	ret
+
+00000138 <usart_data_receive>:
+_delay_ms(1);
+}
+
+unsigned char usart_data_receive( void )
+{
+while ( !(UCSRA & (1<<RXC)) );
+ 138:	5f 9b       	sbis	0x0b, 7	; 11
+ 13a:	fe cf       	rjmp	.-4      	; 0x138 <usart_data_receive>
+return UDR;
+ 13c:	8c b1       	in	r24, 0x0c	; 12
+}
+ 13e:	08 95       	ret
+
+00000140 <usart_string_transmit>:
+
+void usart_string_transmit(char *string)
+{
+ 140:	cf 93       	push	r28
+ 142:	df 93       	push	r29
+ 144:	ec 01       	movw	r28, r24
+while(*string)
+ 146:	88 81       	ld	r24, Y
+ 148:	88 23       	and	r24, r24
+ 14a:	31 f0       	breq	.+12     	; 0x158 <usart_string_transmit+0x18>
+ 14c:	21 96       	adiw	r28, 0x01	; 1
+{
+usart_data_transmit(*string++);
+ 14e:	0e 94 92 00 	call	0x124	; 0x124 <usart_data_transmit>
+return UDR;
+}
+
+void usart_string_transmit(char *string)
+{
+while(*string)
+ 152:	89 91       	ld	r24, Y+
+ 154:	81 11       	cpse	r24, r1
+ 156:	fb cf       	rjmp	.-10     	; 0x14e <usart_string_transmit+0xe>
+{
+usart_data_transmit(*string++);
+}
+}
+ 158:	df 91       	pop	r29
+ 15a:	cf 91       	pop	r28
+ 15c:	08 95       	ret
+
+0000015e <main>:
+#include "lcd.h"					
+#include "hc05.h"     
+
+int main(void)
+{
+	DDRB=0xff;								//All the 8 pins of PortB are declared output (data pins of LCD are connected)
+ 15e:	8f ef       	ldi	r24, 0xFF	; 255
+ 160:	87 bb       	out	0x17, r24	; 23
+	DDRC=0x07;								//PC0, PC1 and PC2 pins of PortC are declared output (control pins of LCD are connected)
+ 162:	87 e0       	ldi	r24, 0x07	; 7
+ 164:	84 bb       	out	0x14, r24	; 20
+	
+	unsigned char received_data;			//Variable declaration
+	lcd_init();								//LCD initialization
+ 166:	0e 94 6c 00 	call	0xd8	; 0xd8 <lcd_init>
+	usart_init();							//USART initialization
+ 16a:	0e 94 88 00 	call	0x110	; 0x110 <usart_init>
+{
+	return usart_data_receive();
+}
+void hc_05_bluetooth_transmit_string(char *transmit_string)
+{
+	usart_string_transmit(transmit_string);
+ 16e:	82 e4       	ldi	r24, 0x42	; 66
+ 170:	91 e0       	ldi	r25, 0x01	; 1
+ 172:	0e 94 a0 00 	call	0x140	; 0x140 <usart_string_transmit>
+unsigned  char hc_05_bluetooth_pin_change(char *new_pin);
+
+
+void hc_05_bluetooth_transmit_byte(char data_byte)
+{
+	usart_data_transmit(data_byte);
+ 176:	8d e0       	ldi	r24, 0x0D	; 13
+ 178:	0e 94 92 00 	call	0x124	; 0x124 <usart_data_transmit>
+ 17c:	8a e0       	ldi	r24, 0x0A	; 10
+ 17e:	0e 94 92 00 	call	0x124	; 0x124 <usart_data_transmit>
+{
+	return usart_data_receive();
+}
+void hc_05_bluetooth_transmit_string(char *transmit_string)
+{
+	usart_string_transmit(transmit_string);
+ 182:	87 e5       	ldi	r24, 0x57	; 87
+ 184:	91 e0       	ldi	r25, 0x01	; 1
+ 186:	0e 94 a0 00 	call	0x140	; 0x140 <usart_string_transmit>
+unsigned  char hc_05_bluetooth_pin_change(char *new_pin);
+
+
+void hc_05_bluetooth_transmit_byte(char data_byte)
+{
+	usart_data_transmit(data_byte);
+ 18a:	8d e0       	ldi	r24, 0x0D	; 13
+ 18c:	0e 94 92 00 	call	0x124	; 0x124 <usart_data_transmit>
+ 190:	8a e0       	ldi	r24, 0x0A	; 10
+ 192:	0e 94 92 00 	call	0x124	; 0x124 <usart_data_transmit>
+	hc_05_bluetooth_transmit_byte(0x0a);								//Transmits New Line to Blue-tooth Module for new line
+	hc_05_bluetooth_transmit_string("Send one Character at a time");	
+	hc_05_bluetooth_transmit_byte(0x0d);
+	hc_05_bluetooth_transmit_byte(0x0a);
+	
+	lcd_string_write("Kathford R&D");									//String is displayed in 1st row of LCD
+ 196:	84 e7       	ldi	r24, 0x74	; 116
+ 198:	91 e0       	ldi	r25, 0x01	; 1
+ 19a:	0e 94 79 00 	call	0xf2	; 0xf2 <lcd_string_write>
+	lcd_command_write(0xc0);											//Cursor moves to 2nd row 1st column
+ 19e:	80 ec       	ldi	r24, 0xC0	; 192
+ 1a0:	0e 94 5b 00 	call	0xb6	; 0xb6 <lcd_command_write>
+	lcd_string_write("KATHFORD");										//String is displayed in 2nd row of LCD
+ 1a4:	81 e8       	ldi	r24, 0x81	; 129
+ 1a6:	91 e0       	ldi	r25, 0x01	; 1
+ 1a8:	0e 94 79 00 	call	0xf2	; 0xf2 <lcd_string_write>
+ 1ac:	2f e7       	ldi	r18, 0x7F	; 127
+ 1ae:	8f e4       	ldi	r24, 0x4F	; 79
+ 1b0:	92 e1       	ldi	r25, 0x12	; 18
+ 1b2:	21 50       	subi	r18, 0x01	; 1
+ 1b4:	80 40       	sbci	r24, 0x00	; 0
+ 1b6:	90 40       	sbci	r25, 0x00	; 0
+ 1b8:	e1 f7       	brne	.-8      	; 0x1b2 <main+0x54>
+ 1ba:	00 c0       	rjmp	.+0      	; 0x1bc <main+0x5e>
+ 1bc:	00 00       	nop
+ 1be:	2f e7       	ldi	r18, 0x7F	; 127
+ 1c0:	8f e4       	ldi	r24, 0x4F	; 79
+ 1c2:	92 e1       	ldi	r25, 0x12	; 18
+ 1c4:	21 50       	subi	r18, 0x01	; 1
+ 1c6:	80 40       	sbci	r24, 0x00	; 0
+ 1c8:	90 40       	sbci	r25, 0x00	; 0
+ 1ca:	e1 f7       	brne	.-8      	; 0x1c4 <main+0x66>
+ 1cc:	00 c0       	rjmp	.+0      	; 0x1ce <main+0x70>
+ 1ce:	00 00       	nop
+ 1d0:	2f e7       	ldi	r18, 0x7F	; 127
+ 1d2:	8f e4       	ldi	r24, 0x4F	; 79
+ 1d4:	92 e1       	ldi	r25, 0x12	; 18
+ 1d6:	21 50       	subi	r18, 0x01	; 1
+ 1d8:	80 40       	sbci	r24, 0x00	; 0
+ 1da:	90 40       	sbci	r25, 0x00	; 0
+ 1dc:	e1 f7       	brne	.-8      	; 0x1d6 <main+0x78>
+ 1de:	00 c0       	rjmp	.+0      	; 0x1e0 <main+0x82>
+ 1e0:	00 00       	nop
+ 1e2:	2f e7       	ldi	r18, 0x7F	; 127
+ 1e4:	8f e4       	ldi	r24, 0x4F	; 79
+ 1e6:	92 e1       	ldi	r25, 0x12	; 18
+ 1e8:	21 50       	subi	r18, 0x01	; 1
+ 1ea:	80 40       	sbci	r24, 0x00	; 0
+ 1ec:	90 40       	sbci	r25, 0x00	; 0
+ 1ee:	e1 f7       	brne	.-8      	; 0x1e8 <main+0x8a>
+ 1f0:	00 c0       	rjmp	.+0      	; 0x1f2 <main+0x94>
+ 1f2:	00 00       	nop
+	_delay_ms(500);
+	_delay_ms(500);
+	_delay_ms(500);
+	/*2s delay*/
+	
+	lcd_command_write(0x01);									//Clear Screen
+ 1f4:	81 e0       	ldi	r24, 0x01	; 1
+ 1f6:	0e 94 5b 00 	call	0xb6	; 0xb6 <lcd_command_write>
+	lcd_string_write(" Received Data:");						//String is displayed in 1st row of LCD
+ 1fa:	8a e8       	ldi	r24, 0x8A	; 138
+ 1fc:	91 e0       	ldi	r25, 0x01	; 1
+ 1fe:	0e 94 79 00 	call	0xf2	; 0xf2 <lcd_string_write>
+	lcd_command_write(0xc0);									//Cursor moves to 2nd row 1st column
+ 202:	80 ec       	ldi	r24, 0xC0	; 192
+ 204:	0e 94 5b 00 	call	0xb6	; 0xb6 <lcd_command_write>
+}
+char hc_05_bluetooth_receive_byte(void)
+{
+	return usart_data_receive();
+ 208:	0e 94 9c 00 	call	0x138	; 0x138 <usart_data_receive>
+ 20c:	c8 2f       	mov	r28, r24
+	
+	while(1)													//Start the infinite loop
+	{
+		received_data=hc_05_bluetooth_receive_byte();
+		//lcd_init();	
+		lcd_data_write(received_data);							//Displayed received character in 2nd row of LCD
+ 20e:	0e 94 49 00 	call	0x92	; 0x92 <lcd_data_write>
+unsigned  char hc_05_bluetooth_pin_change(char *new_pin);
+
+
+void hc_05_bluetooth_transmit_byte(char data_byte)
+{
+	usart_data_transmit(data_byte);
+ 212:	81 e0       	ldi	r24, 0x01	; 1
+ 214:	8c 0f       	add	r24, r28
+ 216:	0e 94 92 00 	call	0x124	; 0x124 <usart_data_transmit>
+ 21a:	8d e0       	ldi	r24, 0x0D	; 13
+ 21c:	0e 94 92 00 	call	0x124	; 0x124 <usart_data_transmit>
+ 220:	8a e0       	ldi	r24, 0x0A	; 10
+ 222:	0e 94 92 00 	call	0x124	; 0x124 <usart_data_transmit>
+ 226:	f0 cf       	rjmp	.-32     	; 0x208 <main+0xaa>
+
+00000228 <_exit>:
+ 228:	f8 94       	cli
+
+0000022a <__stop_program>:
+ 22a:	ff cf       	rjmp	.-2      	; 0x22a <__stop_program>

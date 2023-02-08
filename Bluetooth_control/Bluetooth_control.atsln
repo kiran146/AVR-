@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Bluetooth_control", "Bluetooth_control\Bluetooth_control.cproj", "{2C8BB901-95E5-4CB6-8952-38822FFBFD3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C8BB901-95E5-4CB6-8952-38822FFBFD3B}.Debug|AVR.ActiveCfg = Debug|AVR
+		{2C8BB901-95E5-4CB6-8952-38822FFBFD3B}.Debug|AVR.Build.0 = Debug|AVR
+		{2C8BB901-95E5-4CB6-8952-38822FFBFD3B}.Release|AVR.ActiveCfg = Release|AVR
+		{2C8BB901-95E5-4CB6-8952-38822FFBFD3B}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
