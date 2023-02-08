@@ -1,0 +1,455 @@
+
+smoke_sensor_MQ2.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000022e  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .comment      00000030  00000000  00000000  00000282  2**0
+                  CONTENTS, READONLY
+  2 .debug_aranges 00000038  00000000  00000000  000002b2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   000002d4  00000000  00000000  000002ea  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 00000172  00000000  00000000  000005be  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   00000316  00000000  00000000  00000730  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000054  00000000  00000000  00000a48  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    000001e9  00000000  00000000  00000a9c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    000001ef  00000000  00000000  00000c85  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_ranges 00000028  00000000  00000000  00000e74  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	29 c0       	rjmp	.+82     	; 0x54 <__ctors_end>
+   2:	00 00       	nop
+   4:	2f c0       	rjmp	.+94     	; 0x64 <__bad_interrupt>
+   6:	00 00       	nop
+   8:	2d c0       	rjmp	.+90     	; 0x64 <__bad_interrupt>
+   a:	00 00       	nop
+   c:	2b c0       	rjmp	.+86     	; 0x64 <__bad_interrupt>
+   e:	00 00       	nop
+  10:	29 c0       	rjmp	.+82     	; 0x64 <__bad_interrupt>
+  12:	00 00       	nop
+  14:	27 c0       	rjmp	.+78     	; 0x64 <__bad_interrupt>
+  16:	00 00       	nop
+  18:	25 c0       	rjmp	.+74     	; 0x64 <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	23 c0       	rjmp	.+70     	; 0x64 <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	21 c0       	rjmp	.+66     	; 0x64 <__bad_interrupt>
+  22:	00 00       	nop
+  24:	1f c0       	rjmp	.+62     	; 0x64 <__bad_interrupt>
+  26:	00 00       	nop
+  28:	1d c0       	rjmp	.+58     	; 0x64 <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	1b c0       	rjmp	.+54     	; 0x64 <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	19 c0       	rjmp	.+50     	; 0x64 <__bad_interrupt>
+  32:	00 00       	nop
+  34:	17 c0       	rjmp	.+46     	; 0x64 <__bad_interrupt>
+  36:	00 00       	nop
+  38:	15 c0       	rjmp	.+42     	; 0x64 <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	13 c0       	rjmp	.+38     	; 0x64 <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	11 c0       	rjmp	.+34     	; 0x64 <__bad_interrupt>
+  42:	00 00       	nop
+  44:	0f c0       	rjmp	.+30     	; 0x64 <__bad_interrupt>
+  46:	00 00       	nop
+  48:	0d c0       	rjmp	.+26     	; 0x64 <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	0b c0       	rjmp	.+22     	; 0x64 <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	09 c0       	rjmp	.+18     	; 0x64 <__bad_interrupt>
+	...
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	4a d0       	rcall	.+148    	; 0xf6 <main>
+  62:	e3 c0       	rjmp	.+454    	; 0x22a <_exit>
+
+00000064 <__bad_interrupt>:
+  64:	cd cf       	rjmp	.-102    	; 0x0 <__vectors>
+
+00000066 <display_7segment>:
+/*Function defination*/
+void display_7segment(unsigned char number)
+{
+	if(_7SEGMENT_TYPE==COMMON_ANODE)
+	{
+		if(number==0)
+  66:	81 11       	cpse	r24, r1
+  68:	03 c0       	rjmp	.+6      	; 0x70 <display_7segment+0xa>
+		_7SEGMENT_PORT=0xc0;
+  6a:	80 ec       	ldi	r24, 0xC0	; 192
+  6c:	85 bb       	out	0x15, r24	; 21
+  6e:	08 95       	ret
+		else if(number==1)
+  70:	81 30       	cpi	r24, 0x01	; 1
+  72:	19 f4       	brne	.+6      	; 0x7a <display_7segment+0x14>
+		_7SEGMENT_PORT=0xf9;
+  74:	89 ef       	ldi	r24, 0xF9	; 249
+  76:	85 bb       	out	0x15, r24	; 21
+  78:	08 95       	ret
+		else if(number==2)
+  7a:	82 30       	cpi	r24, 0x02	; 2
+  7c:	19 f4       	brne	.+6      	; 0x84 <display_7segment+0x1e>
+		_7SEGMENT_PORT=0xa4;
+  7e:	84 ea       	ldi	r24, 0xA4	; 164
+  80:	85 bb       	out	0x15, r24	; 21
+  82:	08 95       	ret
+		else if(number==3)
+  84:	83 30       	cpi	r24, 0x03	; 3
+  86:	19 f4       	brne	.+6      	; 0x8e <display_7segment+0x28>
+		_7SEGMENT_PORT=0xb0;
+  88:	80 eb       	ldi	r24, 0xB0	; 176
+  8a:	85 bb       	out	0x15, r24	; 21
+  8c:	08 95       	ret
+		else if(number==4)
+  8e:	84 30       	cpi	r24, 0x04	; 4
+  90:	19 f4       	brne	.+6      	; 0x98 <display_7segment+0x32>
+		_7SEGMENT_PORT=0x99;
+  92:	89 e9       	ldi	r24, 0x99	; 153
+  94:	85 bb       	out	0x15, r24	; 21
+  96:	08 95       	ret
+		else if(number==5)
+  98:	85 30       	cpi	r24, 0x05	; 5
+  9a:	19 f4       	brne	.+6      	; 0xa2 <display_7segment+0x3c>
+		_7SEGMENT_PORT=0x92;
+  9c:	82 e9       	ldi	r24, 0x92	; 146
+  9e:	85 bb       	out	0x15, r24	; 21
+  a0:	08 95       	ret
+		else if(number==6)
+  a2:	86 30       	cpi	r24, 0x06	; 6
+  a4:	19 f4       	brne	.+6      	; 0xac <display_7segment+0x46>
+		_7SEGMENT_PORT=0x82;
+  a6:	82 e8       	ldi	r24, 0x82	; 130
+  a8:	85 bb       	out	0x15, r24	; 21
+  aa:	08 95       	ret
+		else if(number==7)
+  ac:	87 30       	cpi	r24, 0x07	; 7
+  ae:	19 f4       	brne	.+6      	; 0xb6 <display_7segment+0x50>
+		_7SEGMENT_PORT=0xf8;
+  b0:	88 ef       	ldi	r24, 0xF8	; 248
+  b2:	85 bb       	out	0x15, r24	; 21
+  b4:	08 95       	ret
+		else if(number==8)
+  b6:	88 30       	cpi	r24, 0x08	; 8
+  b8:	19 f4       	brne	.+6      	; 0xc0 <display_7segment+0x5a>
+		_7SEGMENT_PORT=0x80;
+  ba:	80 e8       	ldi	r24, 0x80	; 128
+  bc:	85 bb       	out	0x15, r24	; 21
+  be:	08 95       	ret
+		else if(number==9)
+  c0:	89 30       	cpi	r24, 0x09	; 9
+  c2:	19 f4       	brne	.+6      	; 0xca <display_7segment+0x64>
+		_7SEGMENT_PORT=0x90;
+  c4:	80 e9       	ldi	r24, 0x90	; 144
+  c6:	85 bb       	out	0x15, r24	; 21
+  c8:	08 95       	ret
+		else if(number==10)
+  ca:	8a 30       	cpi	r24, 0x0A	; 10
+  cc:	11 f4       	brne	.+4      	; 0xd2 <display_7segment+0x6c>
+		_7SEGMENT_PORT=0x7f;
+  ce:	8f e7       	ldi	r24, 0x7F	; 127
+  d0:	85 bb       	out	0x15, r24	; 21
+  d2:	08 95       	ret
+
+000000d4 <adc_init>:
+int read_adc_channel(unsigned char channel);
+
+/*Function definations*/
+void adc_init(void)
+{
+	ADCSRA=(1<<ADEN)|(1<<ADSC)|(1<<ADATE)|(1<<ADPS2);
+  d4:	84 ee       	ldi	r24, 0xE4	; 228
+  d6:	86 b9       	out	0x06, r24	; 6
+	SFIOR=0x00;
+  d8:	10 be       	out	0x30, r1	; 48
+  da:	08 95       	ret
+
+000000dc <read_adc_channel>:
+
+int read_adc_channel(unsigned char channel)
+{
+	int adc_value;
+	unsigned char temp;
+	ADMUX=(1<<REFS0)|channel;
+  dc:	80 64       	ori	r24, 0x40	; 64
+  de:	87 b9       	out	0x07, r24	; 7
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  e0:	89 ef       	ldi	r24, 0xF9	; 249
+  e2:	90 e0       	ldi	r25, 0x00	; 0
+  e4:	01 97       	sbiw	r24, 0x01	; 1
+  e6:	f1 f7       	brne	.-4      	; 0xe4 <read_adc_channel+0x8>
+  e8:	00 c0       	rjmp	.+0      	; 0xea <read_adc_channel+0xe>
+  ea:	00 00       	nop
+	_delay_ms(1);
+	temp=ADCL;
+  ec:	84 b1       	in	r24, 0x04	; 4
+	adc_value=ADCH;
+  ee:	25 b1       	in	r18, 0x05	; 5
+	adc_value=(adc_value<<8)|temp;
+  f0:	90 e0       	ldi	r25, 0x00	; 0
+	return adc_value;
+}
+  f2:	92 2b       	or	r25, r18
+  f4:	08 95       	ret
+
+000000f6 <main>:
+#include "ADC.h"
+#define MQ2_SENSOR_REF 700
+
+int main(void)
+{
+	DDRC=0xff;									/*All the 8 pins of PortC are declared output (7-segment displays are connected)*/
+  f6:	8f ef       	ldi	r24, 0xFF	; 255
+  f8:	84 bb       	out	0x14, r24	; 20
+	DDRD=0x0f;									/*LSB pins of PORTD are declared output (display select pins 1, 2, 3 and 4 of Quad 7-segment Display are connected)*/
+  fa:	8f e0       	ldi	r24, 0x0F	; 15
+  fc:	81 bb       	out	0x11, r24	; 17
+	DDRB=0x01;
+  fe:	81 e0       	ldi	r24, 0x01	; 1
+ 100:	87 bb       	out	0x17, r24	; 23
+	int mq2_smoke_sensor_output;				/*Variable declarations*/
+	unsigned char temp;
+	adc_init();									/*ADC initialization*/
+ 102:	e8 df       	rcall	.-48     	; 0xd4 <adc_init>
+	
+	while(1)
+	{
+		mq2_smoke_sensor_output=read_adc_channel(0);      /*Reading smoke sensor value*/
+		temp=mq2_smoke_sensor_output/1000;				  /*Getting 1000th digit of smoke sensor output value*/
+ 104:	0f 2e       	mov	r0, r31
+ 106:	f8 ee       	ldi	r31, 0xE8	; 232
+ 108:	cf 2e       	mov	r12, r31
+ 10a:	f3 e0       	ldi	r31, 0x03	; 3
+ 10c:	df 2e       	mov	r13, r31
+ 10e:	f0 2d       	mov	r31, r0
+		display_7segment(temp);							  /*Displaying 1000th digit of smoke sensor output value in 7-segment display1*/
+		PORTD=0x01;										  /*7-segment display1 is On*/
+ 110:	aa 24       	eor	r10, r10
+ 112:	a3 94       	inc	r10
+		_delay_ms(3);
+		temp=mq2_smoke_sensor_output/100;				  /*Getting 1000th and 100th digit of smoke sensor output value*/
+ 114:	0f 2e       	mov	r0, r31
+ 116:	f4 e6       	ldi	r31, 0x64	; 100
+ 118:	ef 2e       	mov	r14, r31
+ 11a:	f1 2c       	mov	r15, r1
+ 11c:	f0 2d       	mov	r31, r0
+		temp=temp%10;									  /*Getting 100th digit of smoke sensor output value*/
+ 11e:	0f 2e       	mov	r0, r31
+ 120:	fd ec       	ldi	r31, 0xCD	; 205
+ 122:	bf 2e       	mov	r11, r31
+ 124:	f0 2d       	mov	r31, r0
+		display_7segment(temp);
+		PORTD=0x02;										  /*7-segment display2 is On*/
+ 126:	68 94       	set
+ 128:	77 24       	eor	r7, r7
+ 12a:	71 f8       	bld	r7, 1
+		_delay_ms(3);
+		temp=mq2_smoke_sensor_output/10;				  /*Getting 1000th, 100th and 10th digit of smoke sensor output value*/
+ 12c:	0a e0       	ldi	r16, 0x0A	; 10
+ 12e:	10 e0       	ldi	r17, 0x00	; 0
+		temp=temp%10;									  /*Getting 10th digit of smoke sensor output value*/
+		display_7segment(temp);
+		PORTD=0x04;										  /*7-segment display3 is On*/
+ 130:	68 94       	set
+ 132:	88 24       	eor	r8, r8
+ 134:	82 f8       	bld	r8, 2
+		_delay_ms(3);
+		temp=mq2_smoke_sensor_output%10;				  /*Getting unit digit of smoke sensor output value*/
+		display_7segment(temp);
+		PORTD=0x08;										  /*7-segment display4 is On*/
+ 136:	68 94       	set
+ 138:	99 24       	eor	r9, r9
+ 13a:	93 f8       	bld	r9, 3
+	unsigned char temp;
+	adc_init();									/*ADC initialization*/
+	
+	while(1)
+	{
+		mq2_smoke_sensor_output=read_adc_channel(0);      /*Reading smoke sensor value*/
+ 13c:	80 e0       	ldi	r24, 0x00	; 0
+ 13e:	ce df       	rcall	.-100    	; 0xdc <read_adc_channel>
+ 140:	ec 01       	movw	r28, r24
+		temp=mq2_smoke_sensor_output/1000;				  /*Getting 1000th digit of smoke sensor output value*/
+ 142:	b6 01       	movw	r22, r12
+ 144:	4b d0       	rcall	.+150    	; 0x1dc <__divmodhi4>
+ 146:	86 2f       	mov	r24, r22
+		display_7segment(temp);							  /*Displaying 1000th digit of smoke sensor output value in 7-segment display1*/
+ 148:	8e df       	rcall	.-228    	; 0x66 <display_7segment>
+		PORTD=0x01;										  /*7-segment display1 is On*/
+ 14a:	a2 ba       	out	0x12, r10	; 18
+ 14c:	8d ee       	ldi	r24, 0xED	; 237
+ 14e:	92 e0       	ldi	r25, 0x02	; 2
+ 150:	01 97       	sbiw	r24, 0x01	; 1
+ 152:	f1 f7       	brne	.-4      	; 0x150 <main+0x5a>
+ 154:	00 c0       	rjmp	.+0      	; 0x156 <main+0x60>
+ 156:	00 00       	nop
+		_delay_ms(3);
+		temp=mq2_smoke_sensor_output/100;				  /*Getting 1000th and 100th digit of smoke sensor output value*/
+ 158:	ce 01       	movw	r24, r28
+ 15a:	b7 01       	movw	r22, r14
+ 15c:	3f d0       	rcall	.+126    	; 0x1dc <__divmodhi4>
+		temp=temp%10;									  /*Getting 100th digit of smoke sensor output value*/
+ 15e:	6b 9d       	mul	r22, r11
+ 160:	81 2d       	mov	r24, r1
+ 162:	11 24       	eor	r1, r1
+ 164:	86 95       	lsr	r24
+ 166:	86 95       	lsr	r24
+ 168:	86 95       	lsr	r24
+ 16a:	88 0f       	add	r24, r24
+ 16c:	98 2f       	mov	r25, r24
+ 16e:	99 0f       	add	r25, r25
+ 170:	99 0f       	add	r25, r25
+ 172:	89 0f       	add	r24, r25
+		display_7segment(temp);
+ 174:	68 1b       	sub	r22, r24
+ 176:	86 2f       	mov	r24, r22
+ 178:	76 df       	rcall	.-276    	; 0x66 <display_7segment>
+		PORTD=0x02;										  /*7-segment display2 is On*/
+ 17a:	72 ba       	out	0x12, r7	; 18
+ 17c:	8d ee       	ldi	r24, 0xED	; 237
+ 17e:	92 e0       	ldi	r25, 0x02	; 2
+ 180:	01 97       	sbiw	r24, 0x01	; 1
+ 182:	f1 f7       	brne	.-4      	; 0x180 <main+0x8a>
+ 184:	00 c0       	rjmp	.+0      	; 0x186 <main+0x90>
+ 186:	00 00       	nop
+		_delay_ms(3);
+		temp=mq2_smoke_sensor_output/10;				  /*Getting 1000th, 100th and 10th digit of smoke sensor output value*/
+ 188:	ce 01       	movw	r24, r28
+ 18a:	b8 01       	movw	r22, r16
+ 18c:	27 d0       	rcall	.+78     	; 0x1dc <__divmodhi4>
+		temp=temp%10;									  /*Getting 10th digit of smoke sensor output value*/
+ 18e:	6b 9d       	mul	r22, r11
+ 190:	81 2d       	mov	r24, r1
+ 192:	11 24       	eor	r1, r1
+ 194:	86 95       	lsr	r24
+ 196:	86 95       	lsr	r24
+ 198:	86 95       	lsr	r24
+ 19a:	88 0f       	add	r24, r24
+ 19c:	98 2f       	mov	r25, r24
+ 19e:	99 0f       	add	r25, r25
+ 1a0:	99 0f       	add	r25, r25
+ 1a2:	89 0f       	add	r24, r25
+		display_7segment(temp);
+ 1a4:	68 1b       	sub	r22, r24
+ 1a6:	86 2f       	mov	r24, r22
+ 1a8:	5e df       	rcall	.-324    	; 0x66 <display_7segment>
+		PORTD=0x04;										  /*7-segment display3 is On*/
+ 1aa:	82 ba       	out	0x12, r8	; 18
+ 1ac:	8d ee       	ldi	r24, 0xED	; 237
+ 1ae:	92 e0       	ldi	r25, 0x02	; 2
+ 1b0:	01 97       	sbiw	r24, 0x01	; 1
+ 1b2:	f1 f7       	brne	.-4      	; 0x1b0 <main+0xba>
+ 1b4:	00 c0       	rjmp	.+0      	; 0x1b6 <main+0xc0>
+ 1b6:	00 00       	nop
+		_delay_ms(3);
+		temp=mq2_smoke_sensor_output%10;				  /*Getting unit digit of smoke sensor output value*/
+ 1b8:	ce 01       	movw	r24, r28
+ 1ba:	b8 01       	movw	r22, r16
+ 1bc:	0f d0       	rcall	.+30     	; 0x1dc <__divmodhi4>
+		display_7segment(temp);
+ 1be:	53 df       	rcall	.-346    	; 0x66 <display_7segment>
+		PORTD=0x08;										  /*7-segment display4 is On*/
+ 1c0:	92 ba       	out	0x12, r9	; 18
+ 1c2:	83 ec       	ldi	r24, 0xC3	; 195
+ 1c4:	99 e0       	ldi	r25, 0x09	; 9
+ 1c6:	01 97       	sbiw	r24, 0x01	; 1
+ 1c8:	f1 f7       	brne	.-4      	; 0x1c6 <main+0xd0>
+ 1ca:	00 c0       	rjmp	.+0      	; 0x1cc <main+0xd6>
+ 1cc:	00 00       	nop
+		_delay_ms(10);
+		
+/*Checking MQ-2 Smoke Sensor output with threshold to turn On or Off Buzzer*/
+		if(mq2_smoke_sensor_output > MQ2_SENSOR_REF)
+ 1ce:	cd 3b       	cpi	r28, 0xBD	; 189
+ 1d0:	d2 40       	sbci	r29, 0x02	; 2
+ 1d2:	14 f0       	brlt	.+4      	; 0x1d8 <main+0xe2>
+		{
+			PORTB=0x01;			/*Buzzer is On*/
+ 1d4:	a8 ba       	out	0x18, r10	; 24
+ 1d6:	b2 cf       	rjmp	.-156    	; 0x13c <main+0x46>
+		}
+		else
+		{
+			PORTB=0x00;			/*Buzzer is Off*/
+ 1d8:	18 ba       	out	0x18, r1	; 24
+ 1da:	b0 cf       	rjmp	.-160    	; 0x13c <main+0x46>
+
+000001dc <__divmodhi4>:
+ 1dc:	97 fb       	bst	r25, 7
+ 1de:	07 2e       	mov	r0, r23
+ 1e0:	16 f4       	brtc	.+4      	; 0x1e6 <__divmodhi4+0xa>
+ 1e2:	00 94       	com	r0
+ 1e4:	06 d0       	rcall	.+12     	; 0x1f2 <__divmodhi4_neg1>
+ 1e6:	77 fd       	sbrc	r23, 7
+ 1e8:	08 d0       	rcall	.+16     	; 0x1fa <__divmodhi4_neg2>
+ 1ea:	0b d0       	rcall	.+22     	; 0x202 <__udivmodhi4>
+ 1ec:	07 fc       	sbrc	r0, 7
+ 1ee:	05 d0       	rcall	.+10     	; 0x1fa <__divmodhi4_neg2>
+ 1f0:	3e f4       	brtc	.+14     	; 0x200 <__divmodhi4_exit>
+
+000001f2 <__divmodhi4_neg1>:
+ 1f2:	90 95       	com	r25
+ 1f4:	81 95       	neg	r24
+ 1f6:	9f 4f       	sbci	r25, 0xFF	; 255
+ 1f8:	08 95       	ret
+
+000001fa <__divmodhi4_neg2>:
+ 1fa:	70 95       	com	r23
+ 1fc:	61 95       	neg	r22
+ 1fe:	7f 4f       	sbci	r23, 0xFF	; 255
+
+00000200 <__divmodhi4_exit>:
+ 200:	08 95       	ret
+
+00000202 <__udivmodhi4>:
+ 202:	aa 1b       	sub	r26, r26
+ 204:	bb 1b       	sub	r27, r27
+ 206:	51 e1       	ldi	r21, 0x11	; 17
+ 208:	07 c0       	rjmp	.+14     	; 0x218 <__udivmodhi4_ep>
+
+0000020a <__udivmodhi4_loop>:
+ 20a:	aa 1f       	adc	r26, r26
+ 20c:	bb 1f       	adc	r27, r27
+ 20e:	a6 17       	cp	r26, r22
+ 210:	b7 07       	cpc	r27, r23
+ 212:	10 f0       	brcs	.+4      	; 0x218 <__udivmodhi4_ep>
+ 214:	a6 1b       	sub	r26, r22
+ 216:	b7 0b       	sbc	r27, r23
+
+00000218 <__udivmodhi4_ep>:
+ 218:	88 1f       	adc	r24, r24
+ 21a:	99 1f       	adc	r25, r25
+ 21c:	5a 95       	dec	r21
+ 21e:	a9 f7       	brne	.-22     	; 0x20a <__udivmodhi4_loop>
+ 220:	80 95       	com	r24
+ 222:	90 95       	com	r25
+ 224:	bc 01       	movw	r22, r24
+ 226:	cd 01       	movw	r24, r26
+ 228:	08 95       	ret
+
+0000022a <_exit>:
+ 22a:	f8 94       	cli
+
+0000022c <__stop_program>:
+ 22c:	ff cf       	rjmp	.-2      	; 0x22c <__stop_program>

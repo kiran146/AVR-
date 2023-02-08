@@ -1,0 +1,276 @@
+
+7_segment.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000120  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .comment      00000030  00000000  00000000  00000174  2**0
+                  CONTENTS, READONLY
+  2 .debug_aranges 00000028  00000000  00000000  000001a4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   0000015f  00000000  00000000  000001cc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 00000113  00000000  00000000  0000032b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   0000015e  00000000  00000000  0000043e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000034  00000000  00000000  0000059c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    00000188  00000000  00000000  000005d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    0000018a  00000000  00000000  00000758  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_ranges 00000018  00000000  00000000  000008e2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	48 00       	.word	0x0048	; ????
+  56:	5c 00       	.word	0x005c	; ????
+  58:	4a 00       	.word	0x004a	; ????
+  5a:	4c 00       	.word	0x004c	; ????
+  5c:	4e 00       	.word	0x004e	; ????
+  5e:	50 00       	.word	0x0050	; ????
+  60:	52 00       	.word	0x0052	; ????
+  62:	54 00       	.word	0x0054	; ????
+  64:	56 00       	.word	0x0056	; ????
+  66:	58 00       	.word	0x0058	; ????
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf e5       	ldi	r28, 0x5F	; 95
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 5e 00 	call	0xbc	; 0xbc <main>
+  78:	0c 94 8e 00 	jmp	0x11c	; 0x11c <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <decode>:
+}
+
+//function to calculate 7_segment value 
+uint8_t decode(int count)
+{
+	switch(count)
+  80:	8a 30       	cpi	r24, 0x0A	; 10
+  82:	91 05       	cpc	r25, r1
+  84:	b8 f4       	brcc	.+46     	; 0xb4 <decode+0x34>
+  86:	fc 01       	movw	r30, r24
+  88:	e6 5d       	subi	r30, 0xD6	; 214
+  8a:	ff 4f       	sbci	r31, 0xFF	; 255
+  8c:	0c 94 88 00 	jmp	0x110	; 0x110 <__tablejump2__>
+	{
+		case 0:
+		{
+			return 0x3f;
+  90:	8f e3       	ldi	r24, 0x3F	; 63
+  92:	08 95       	ret
+			return 0x06;
+			break;
+		}
+		case 2:
+		{
+			return 0x5b;
+  94:	8b e5       	ldi	r24, 0x5B	; 91
+  96:	08 95       	ret
+			break;
+		}
+		case 3:
+		{
+			return 0x4f;
+  98:	8f e4       	ldi	r24, 0x4F	; 79
+  9a:	08 95       	ret
+			break;
+		}
+		case 4:
+		{
+			return 0x66;
+  9c:	86 e6       	ldi	r24, 0x66	; 102
+  9e:	08 95       	ret
+			break;
+		}
+		case 5:
+		{
+			return 0x6d;
+  a0:	8d e6       	ldi	r24, 0x6D	; 109
+  a2:	08 95       	ret
+			break;
+		}
+		case 6:
+		{
+			return 0x7d;
+  a4:	8d e7       	ldi	r24, 0x7D	; 125
+  a6:	08 95       	ret
+			break;
+		}
+		case 7:
+		{
+			return 0x07;
+  a8:	87 e0       	ldi	r24, 0x07	; 7
+  aa:	08 95       	ret
+			break;
+		}
+		case 8:
+		{
+			return 0x7f;
+  ac:	8f e7       	ldi	r24, 0x7F	; 127
+  ae:	08 95       	ret
+			break;
+		}
+		case 9:
+		{
+			return 0x6f;
+  b0:	8f e6       	ldi	r24, 0x6F	; 111
+  b2:	08 95       	ret
+			break;
+		}
+		default:
+		break;
+	}
+	return 0;
+  b4:	80 e0       	ldi	r24, 0x00	; 0
+  b6:	08 95       	ret
+			return 0x3f;
+			break;
+		}
+		case 1:
+		{
+			return 0x06;
+  b8:	86 e0       	ldi	r24, 0x06	; 6
+		}
+		default:
+		break;
+	}
+	return 0;
+}
+  ba:	08 95       	ret
+
+000000bc <main>:
+
+//Main function
+int main()
+{
+	int counter;        //variable to hold count
+	DDRC=0xff;        //PORT C configured as output
+  bc:	8f ef       	ldi	r24, 0xFF	; 255
+  be:	84 bb       	out	0x14, r24	; 20
+	DDRB=0xfc;        //PORT B configured as input
+  c0:	8c ef       	ldi	r24, 0xFC	; 252
+  c2:	87 bb       	out	0x17, r24	; 23
+	PORTC-0x00;
+  c4:	85 b3       	in	r24, 0x15	; 21
+	PORTB=0x00;
+  c6:	18 ba       	out	0x18, r1	; 24
+		if(increase)        //increase count if increase button is pressed
+		counter++;
+		if(decrease)        //decrease count if decrease button is pressed
+		counter--;
+		if(counter>9)            //rolls count back to zero(0) if it becomes
+		counter=0;            //greater than 9
+  c8:	00 e0       	ldi	r16, 0x00	; 0
+  ca:	10 e0       	ldi	r17, 0x00	; 0
+		if(counter<0)            //change count to 9 if it becomes negative
+		counter=9;
+  cc:	0f 2e       	mov	r0, r31
+  ce:	f9 e0       	ldi	r31, 0x09	; 9
+  d0:	ef 2e       	mov	r14, r31
+  d2:	f0 2d       	mov	r31, r0
+  d4:	f1 2c       	mov	r15, r1
+	PORTB=0x00;
+
+	//endless loop
+	while(1)
+	{
+		if(increase)        //increase count if increase button is pressed
+  d6:	b0 99       	sbic	0x16, 0	; 22
+		counter++;
+  d8:	21 96       	adiw	r28, 0x01	; 1
+		if(decrease)        //decrease count if decrease button is pressed
+  da:	b1 99       	sbic	0x16, 1	; 22
+		counter--;
+  dc:	21 97       	sbiw	r28, 0x01	; 1
+		if(counter>9)            //rolls count back to zero(0) if it becomes
+  de:	ca 30       	cpi	r28, 0x0A	; 10
+  e0:	d1 05       	cpc	r29, r1
+  e2:	1c f4       	brge	.+6      	; 0xea <main+0x2e>
+		counter=0;            //greater than 9
+		if(counter<0)            //change count to 9 if it becomes negative
+  e4:	dd 23       	and	r29, r29
+  e6:	24 f0       	brlt	.+8      	; 0xf0 <main+0x34>
+  e8:	05 c0       	rjmp	.+10     	; 0xf4 <main+0x38>
+		if(increase)        //increase count if increase button is pressed
+		counter++;
+		if(decrease)        //decrease count if decrease button is pressed
+		counter--;
+		if(counter>9)            //rolls count back to zero(0) if it becomes
+		counter=0;            //greater than 9
+  ea:	c0 2f       	mov	r28, r16
+  ec:	d1 2f       	mov	r29, r17
+  ee:	02 c0       	rjmp	.+4      	; 0xf4 <main+0x38>
+		if(counter<0)            //change count to 9 if it becomes negative
+		counter=9;
+  f0:	ce 2d       	mov	r28, r14
+  f2:	df 2d       	mov	r29, r15
+		seven_segment= decode(counter);
+  f4:	ce 01       	movw	r24, r28
+  f6:	0e 94 40 00 	call	0x80	; 0x80 <decode>
+  fa:	85 bb       	out	0x15, r24	; 21
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  fc:	8f ef       	ldi	r24, 0xFF	; 255
+  fe:	99 e6       	ldi	r25, 0x69	; 105
+ 100:	28 e1       	ldi	r18, 0x18	; 24
+ 102:	81 50       	subi	r24, 0x01	; 1
+ 104:	90 40       	sbci	r25, 0x00	; 0
+ 106:	20 40       	sbci	r18, 0x00	; 0
+ 108:	e1 f7       	brne	.-8      	; 0x102 <main+0x46>
+ 10a:	00 c0       	rjmp	.+0      	; 0x10c <main+0x50>
+ 10c:	00 00       	nop
+ 10e:	e3 cf       	rjmp	.-58     	; 0xd6 <main+0x1a>
+
+00000110 <__tablejump2__>:
+ 110:	ee 0f       	add	r30, r30
+ 112:	ff 1f       	adc	r31, r31
+
+00000114 <__tablejump__>:
+ 114:	05 90       	lpm	r0, Z+
+ 116:	f4 91       	lpm	r31, Z
+ 118:	e0 2d       	mov	r30, r0
+ 11a:	09 94       	ijmp
+
+0000011c <_exit>:
+ 11c:	f8 94       	cli
+
+0000011e <__stop_program>:
+ 11e:	ff cf       	rjmp	.-2      	; 0x11e <__stop_program>
